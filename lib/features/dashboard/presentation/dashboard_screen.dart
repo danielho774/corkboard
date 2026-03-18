@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../presentation/group_card.dart';
+import 'board_card.dart';
 import '../data/group_repository.dart';
 
 class DashboardScreen extends ConsumerWidget {
