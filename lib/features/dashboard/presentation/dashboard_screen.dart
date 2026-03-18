@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'board_card.dart';
-import '../data/group_repository.dart';
+import '../data/board_repository.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -9,25 +9,25 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final groupsAsync = ref.watch(groupsStreamProvider);
+    final boardsAsync = ref.watch(boardsStreamProvider);
 
-    void addGroup() {
+    void addBoard() {
         //Open Modal
     }
 
     return Scaffold(
-      body: groupsAsync.when(
-        data: (groups) => ListView.builder(
-          itemCount: groups.length,
-          itemBuilder: (context, index) => GroupCard(
-            group: groups[index],
+      body: boardsAsync.when(
+        data: (boards) => ListView.builder(
+          itemCount: boards.length,
+          itemBuilder: (context, index) => BoardCard(
+            board: boards[index],
           ),
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: addGroup, 
+        onPressed: addBoard, 
         child: const Icon(Icons.add)
       )
     );

@@ -1,11 +1,11 @@
-import 'package:corkboard_flutter_app/features/dashboard/domain/group.dart';
+import 'package:corkboard_flutter_app/features/dashboard/domain/board.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class GroupCard extends StatelessWidget {
-  final Group group;
+class BoardCard extends StatelessWidget {
+  final Board board;
 
-  const GroupCard({super.key, required this.group});
+  const BoardCard({super.key, required this.board});
 
   void handleSelected(String value) {
     // handle select from dropdown menu
@@ -32,7 +32,7 @@ class GroupCard extends StatelessWidget {
                     icon: const Icon(Icons.more_vert),
                     onSelected: (value) => handleSelected(value),
                     itemBuilder: (context) => [
-                      const PopupMenuItem(value: 'edit', child: Text('Edit Group')),
+                      const PopupMenuItem(value: 'edit', child: Text('Edit Board')),
                       const PopupMenuItem(value: 'delete', child: Text('Delete')),
                     ],
                   ),
@@ -40,12 +40,12 @@ class GroupCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                group.name,
+                board.name,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text("${group.memberCount} Members"),
+              Text("${board.memberCount} Members"),
             ],
           ),
         ),
