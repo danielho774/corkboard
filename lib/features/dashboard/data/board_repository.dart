@@ -4,6 +4,8 @@ import '../domain/board.dart';
 part 'board_repository.g.dart';
 
 class  BoardRepository {
+  // TODO: connect to FastAPI or PostgresSQL API
+
   // A stream that mimics a database update every 5 seconds
   Stream<List<Board>> watchBoards() async* {
     yield [

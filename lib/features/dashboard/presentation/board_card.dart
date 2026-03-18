@@ -17,7 +17,7 @@ class BoardCard extends StatelessWidget {
     return (Card(
       clipBehavior: Clip.antiAlias, // Ensures the ripple stays inside the rounded corners
       child: InkWell(
-        onTap: () => context.push('/feature-page'), // Primary Action
+        onTap: () => context.push('/board/${board.name}/${board.id}'), // Primary Action
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

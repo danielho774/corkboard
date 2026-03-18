@@ -15,6 +15,10 @@ class BoardScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(boardName)
       ),
+      body: Center(
+        child: Text("Viewing Board ID: $boardId"),
+        // Here you would eventually call ref.watch(boardProvider(boardId))
+      ),
     );
   }
 }
