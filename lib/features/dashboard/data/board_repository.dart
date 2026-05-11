@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../domain/board.dart';
+import 'package:uuid/uuid.dart';
 
 part 'board_repository.g.dart';
 
@@ -8,20 +9,34 @@ class  BoardRepository {
 
   // A stream that mimics a database update every 5 seconds
   Stream<List<Board>> watchBoards() async* {
-    yield [
-      Board(id: '1', name: 'Camping', members: ["Donald", "Daisy"]),
-      Board(id: '2', name: 'LA Eats', members: ["Mickey", "Minnie"]),
+    var boardList = [
+      Board(id: const Uuid().v4(), name: 'Camping', members: ["Donald", "Daisy"]),
+      Board(id: const Uuid().v4(), name: 'LA Eats', members: ["Mickey", "Minnie"]),
     ];
+
+    yield boardList;
     
     await Future.delayed(const Duration(seconds: 5));
     
+    boardList.add(Board(id: const Uuid().v4(), name: 'NBA Fantasy', members: ["Steph", "KD", "Lebron"]));
+
     // Simulate a new Board being added remotely
-    yield [
-      Board(id: '1', name: 'Camping', members: ["Donald", "Daisy"]),
-      Board(id: '2', name: 'LA Eats', members: ["Mickey", "Minnie"]),
-      Board(id: '3', name: 'NBA Fantasy', members: ["Steph", "KD", "Lebron"]), //
-    ];
+    yield [...boardList];
   }
+
+  // Create a new Board
+  Future<Board> createBoard(BoardEntry boardEntry) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final uuid = Uuid().v4();
+
+    Board createdBoard = Board(
+      id: uuid, 
+      name: boardEntry.name,
+      members: boardEntry.members,
+    );
+
+    return createdBoard;
+  }   
 }
 
 @riverpod

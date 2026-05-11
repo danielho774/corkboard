@@ -26,6 +26,10 @@ class CorkboardTheme {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
+
+      textTheme: const TextTheme(
+
+      )
     );
   }
 }
