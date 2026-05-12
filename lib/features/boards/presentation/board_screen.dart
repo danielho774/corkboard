@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'board_header.dart';
-import 'board_avatar_stack.dart';
+import 'board_filter_bar.dart';
+import '../provider.dart';
 
 const double HORIZONTAL_PADDING = 8;
 const double VERTICAL_PADDING = 64;
 
 class BoardScreen extends ConsumerWidget {
+  // TODO: change these to all be pulled from API based on board ID
   final String boardId;
   final String boardName;
-  final String boardLabel = "LABEL/TAG";
-  final String description = "Hello, welcome to this group page. Scroll down to see what this group is about.";
-  final int numUsers = 6;
-
+  final String _boardLabel = "LABEL/TAG";
+  final String _description = "Hello, welcome to this group page. Scroll down to see what this group is about.";
+  final int _numUsers = 6;
+  static const List<String> _filters = ["ALL", "LA", "Cali", "Summer"];
 
   const BoardScreen({super.key, 
   required this.boardId, 
@@ -20,6 +22,8 @@ class BoardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedFilters = ref.watch(filterProvider);
+
     return Scaffold (
       body: CustomScrollView(
         slivers: [
@@ -35,8 +39,11 @@ class BoardScreen extends ConsumerWidget {
             child: Padding( 
               padding: const EdgeInsets.all(16.0),
               child: Column(            // Column is NOT a sliver — wrapped here
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BoardHeader(label: boardLabel, title: boardName, description: description, numUsers: numUsers),
+                  BoardHeader(label: _boardLabel, title: boardName, description: _description, numUsers: _numUsers),
+                  SizedBox(height:48),
+                  BoardFilterBar(filters: _filters,),
                 ],
               )
             ),
