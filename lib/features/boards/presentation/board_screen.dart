@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'board_header.dart';
-import 'board_filter_bar.dart';
-import '../provider.dart';
+import 'widgets/board_header.dart';
+import 'widgets/board_filter_bar.dart';
+import '../../../core/providers/board_provider.dart';
 
 const double HORIZONTAL_PADDING = 8;
 const double VERTICAL_PADDING = 64;
@@ -12,9 +12,11 @@ class BoardScreen extends ConsumerWidget {
   final String boardId;
   final String boardName;
   final String _boardLabel = "LABEL/TAG";
-  final String _description = "Hello, welcome to this group page. Scroll down to see what this group is about.";
+  final String _description = "Hello, welcome to this group page. This is just placeholder text. Scroll down to see what this group is about.";
   final int _numUsers = 6;
-  static const List<String> _filters = ["ALL", "LA", "Cali", "Summer"];
+
+  // TODO: add filter function to all activities button (ie. by likes, by cost, by distance)
+  static const List<String> _filters = ["All Activities", "LA", "Cali", "Summer", "Spring", "Favorites"];
 
   const BoardScreen({super.key, 
   required this.boardId, 
