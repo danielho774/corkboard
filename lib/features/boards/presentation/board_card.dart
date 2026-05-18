@@ -1,8 +1,9 @@
 import 'package:corkboard_flutter_app/features/dashboard/domain/board.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BoardCard extends StatelessWidget {
+class BoardCard extends ConsumerWidget {
   final Board board;
 
   const BoardCard({super.key, required this.board});
@@ -13,7 +14,7 @@ class BoardCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return (Card(
       clipBehavior: Clip.antiAlias, // Ensures the ripple stays inside the rounded corners
       child: InkWell(

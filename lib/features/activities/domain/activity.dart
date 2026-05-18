@@ -4,6 +4,7 @@ class Activity {
   final String location;
   final int numLikes;
   final bool isLiked;
+  final bool isSaved;
   final List<String> tags;
   final String description;
 
@@ -13,6 +14,7 @@ class Activity {
     required this.location,
     required this.numLikes,
     required this.isLiked,
+    required this.isSaved,
     required this.tags,
     required this.description,
   });
@@ -26,6 +28,7 @@ class Activity {
       location: json['location'] ?? "",
       numLikes: json['num_likes'] ?? 0,
       isLiked: json['is_liked'] ?? false,
+      isSaved: json['is_saved'] ?? false,
       tags: List<String>.from(json['tags'] ?? [""]),
       description: json['description'] ?? "",
       // imageUrl: json['image_url'] ?? "",
@@ -40,6 +43,7 @@ class Activity {
       'location': location,
       'num_likes': numLikes,
       'is_liked': isLiked,
+      'is_saved': isSaved,
       'tags': tags,
       'description': description,
       'image_url': imageUrl,
@@ -52,6 +56,7 @@ class ActivityEntry {
   final String location;
   final int numLikes;
   final bool isLiked;
+  final bool isSaved;
   final List<String> tags;
   final String description;
 
@@ -60,6 +65,7 @@ class ActivityEntry {
     required this.location,
     required this.numLikes,
     required this.isLiked,
+    required this.isSaved,
     required this.tags,
     required this.description,
   });

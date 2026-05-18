@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/boards/presentation/board_screen.dart';
+import '../../features/activities/presentation/activity_screen.dart';
 // Import your Dashboard screen here later
 
 part 'router.g.dart';
@@ -27,6 +28,14 @@ GoRouter router(Ref ref) {
           final boardName = state.pathParameters['boardName']!;
 
           return BoardScreen(boardId: boardId,boardName: boardName);
+        }
+      ),
+      GoRoute(
+        path: '/activity/:activityId',
+        builder: (context, state) {
+          final activityId = state.pathParameters['activityId']!;
+
+          return ActivityScreen(activityId: activityId);
         }
       )
     ],

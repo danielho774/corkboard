@@ -35,6 +35,7 @@ class BoardScreen extends ConsumerWidget {
       name: 'Example Activity', 
       location: 'Somewhere, US',
       isLiked: true,
+      isSaved: true,
       tags: ['tag 1', '\$\$', 'fun', 'super duper uber long tag'],
       numLikes: 7,
       description: 'This is an example activity. If you click an activity card, it will lead you to the activity page where you can view all the links and information associated with the activity.',
