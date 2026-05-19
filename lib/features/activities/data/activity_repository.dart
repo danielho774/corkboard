@@ -9,6 +9,9 @@ class ActivityRepository {
 
   // A stream that mimics a database update every 5 seconds
   Stream<List<Activity>> watchActivities() async* {
+
+    await Future.delayed(const Duration(seconds: 2));
+
     var ActivityList = [
       Activity(
         id: const Uuid().v4(), 
@@ -88,7 +91,7 @@ class ActivityRepository {
         isSaved: true,
         tags: ['tag 1', '\$\$', 'fun'],
         numLikes: 3,
-        description: 'This activity was fetched by id.',
+        description: 'This activity was fetched by id $id.',
       ),
     ];
 

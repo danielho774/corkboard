@@ -95,3 +95,73 @@ final class ActivitiesStreamProvider
 }
 
 String _$activitiesStreamHash() => r'1f9bb603337036e35ed20c856b834f780d7b401e';
+
+@ProviderFor(activityById)
+const activityByIdProvider = ActivityByIdFamily._();
+
+final class ActivityByIdProvider
+    extends
+        $FunctionalProvider<AsyncValue<Activity>, Activity, FutureOr<Activity>>
+    with $FutureModifier<Activity>, $FutureProvider<Activity> {
+  const ActivityByIdProvider._({
+    required ActivityByIdFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'activityByIdProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$activityByIdHash();
+
+  @override
+  String toString() {
+    return r'activityByIdProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Activity> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Activity> create(Ref ref) {
+    final argument = this.argument as String;
+    return activityById(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ActivityByIdProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$activityByIdHash() => r'88ebf2dde7fd57486e9858645ed462cc7f5adb3a';
+
+final class ActivityByIdFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Activity>, String> {
+  const ActivityByIdFamily._()
+    : super(
+        retry: null,
+        name: r'activityByIdProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ActivityByIdProvider call(String id) =>
+      ActivityByIdProvider._(argument: id, from: this);
+
+  @override
+  String toString() => r'activityByIdProvider';
+}

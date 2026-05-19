@@ -27,7 +27,7 @@ flutter pub get
 Autogenerates `.g.dart` files. For class definitions and maintainability.
 
 ```bash
-dart run build-runner build #--delete-conflicting-outputs
+dart run build_runner build #--delete-conflicting-outputs
 ```
 
 Run flutter app in debug mode

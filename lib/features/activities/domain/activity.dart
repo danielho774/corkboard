@@ -21,34 +21,17 @@ class Activity {
 
   String get imageUrl => 'https://picsum.photos/seed/$name/400/200';
 
-  factory Activity.fromJson(Map<String, dynamic> json) {
-    return Activity(
-      id: json['id'],
-      name: json['name'] ?? "",
-      location: json['location'] ?? "",
-      numLikes: json['num_likes'] ?? 0,
-      isLiked: json['is_liked'] ?? false,
-      isSaved: json['is_saved'] ?? false,
-      tags: List<String>.from(json['tags'] ?? [""]),
-      description: json['description'] ?? "",
-      // imageUrl: json['image_url'] ?? "",
-    );
-  }
-
-  // To send to API
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'location': location,
-      'num_likes': numLikes,
-      'is_liked': isLiked,
-      'is_saved': isSaved,
-      'tags': tags,
-      'description': description,
-      'image_url': imageUrl,
-    };
-  }
+  factory Activity.placeholder() => Activity(
+    id: '0',
+    name: 'Placeholder Activity',
+    location: 'NoWhere, USA',
+    numLikes: 0,
+    isLiked: false,
+    isSaved: false,
+    tags: ['\$'],
+    description: 'This is a placeholder activity. Use this for skeleton loaders. Not representative of a real activity.',
+  );
+  
 }
 
 class ActivityEntry {

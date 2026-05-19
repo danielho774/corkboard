@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'widgets/board_header.dart';
 import 'widgets/board_filter_bar.dart';
 import '../../../core/providers/board_provider.dart';
 import '../../activities/presentation/activity_card.dart';
-import '../../activities/domain/activity.dart';
 import '../../activities/data/activity_repository.dart';
+import '../../activities/domain/activity.dart';
 
 const double HORIZONTAL_PADDING = 8;
 const double VERTICAL_PADDING = 64;
@@ -30,16 +31,8 @@ class BoardScreen extends ConsumerWidget {
     final selectedFilters = ref.watch(filterProvider);
     final activitiesAsync = ref.watch(activitiesStreamProvider);
 
-    final Activity exampleActivity = Activity(
-      id: 'some_uuid',
-      name: 'Example Activity', 
-      location: 'Somewhere, US',
-      isLiked: true,
-      isSaved: true,
-      tags: ['tag 1', '\$\$', 'fun', 'super duper uber long tag'],
-      numLikes: 7,
-      description: 'This is an example activity. If you click an activity card, it will lead you to the activity page where you can view all the links and information associated with the activity.',
-    );    
+    final isLoading = activitiesAsync.isLoading;
+    final activities = activitiesAsync.asData?.value ?? List.generate(3, (_) => Activity.placeholder());
 
     return Scaffold (
       body: CustomScrollView(
@@ -72,26 +65,21 @@ class BoardScreen extends ConsumerWidget {
           ),
 
           // Activities list — as a sliver, no height conflict
-          activitiesAsync.when(
-            data: (activities) => SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: HORIZONTAL_PADDING),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => Padding(
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: HORIZONTAL_PADDING),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: ActivityCard(activity: activities[index]),
-                  ),
-                  childCount: activities.length,
+                    child: Skeletonizer(
+                      enabled: isLoading,
+                      child: ActivityCard(activity: activities[index]),
+                    ),
                 ),
+                childCount: activities.length,
               ),
             ),
-            loading: () => SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (err, stack) => SliverToBoxAdapter(
-              child: Center(child: Text('Error: $err')),
-            ),
-          ),
+          )
         ]
       )
     );
